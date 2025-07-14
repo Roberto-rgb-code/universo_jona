@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia Visual</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div id="loading" class="loading">
+        <div class="loading-bar">
+            <div id="loadingProgressFill" class="loading-progress"></div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-brand">Historia Visual</div>
+        <div class="navbar-toggle" id="navbarToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <ul class="navbar-menu">
+            <li><a href="#bigbang" class="nav-link active">Big Bang</a></li>
+            <li><a href="#adn" class="nav-link">ADN</a></li>
+            <li><a href="#humano" class="nav-link">Humano</a></li>
+            <li><a href="#vitruvio" class="nav-link">Vitruvio</a></li>
+            <li><a href="#newton" class="nav-link">Newton</a></li>
+        </ul>
+        <div class="nav-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+    </nav>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar">
+        <div id="progressFill" class="progress-fill"></div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div id="scrollIndicator" class="scroll-indicator"></div>
+
+    <!-- Sections -->
+    <section id="bigbang" class="section">
+        <div class="canvas-container">
+            <div id="particles-bigbang"></div>
+            <div id="bigbang-canvas"></div>
+        </div>
+        <div class="content">
+            <h1>El Big Bang</h1>
+            <p>El comienzo del universo, un momento de creación cósmica.</p>
+        </div>
+        <div class="narrative left">
+            <p>En el inicio, dos fuerzas cósmicas se encuentran, dando vida al universo.</p>
+        </div>
+    </section>
+
+    <section id="adn" class="section">
+        <div class="canvas-container">
+            <div id="particles-adn"></div>
+            <div id="adn-canvas"></div>
+        </div>
+        <div class="content">
+            <h1>ADN</h1>
+            <p>La molécula de la vida, el código de la existencia.</p>
+        </div>
+        <div class="narrative right">
+            <p>La chispa de la vida emerge, codificada en la doble hélice del ADN.</p>
+        </div>
+    </section>
+
+    <section id="humano" class="section">
+        <div class="canvas-container">
+            <div id="particles-humano"></div>
+            <div id="humano-canvas"></div>
+        </div>
+        <div class="content">
+            <h1>Humano</h1>
+            <p>La evolución de la humanidad, un salto hacia la conciencia.</p>
+        </div>
+        <div class="narrative left">
+            <p>De las moléculas surge el hombre, consciente y creador.</p>
+        </div>
+    </section>
+
+    <section id="vitruvio" class="section">
+        <div class="canvas-container">
+            <div id="particles-vitruvio"></div>
+            <div id="vitruvio-canvas"></div>
+        </div>
+        <div class="content">
+            <h1>Vitruvio</h1>
+            <p>La proporción perfecta, la armonía del hombre y el universo.</p>
+        </div>
+        <div class="narrative right">
+            <p>El hombre alcanza la armonía, reflejada en las proporciones divinas.</p>
+        </div>
+    </section>
+
+    <section id="newton" class="section">
+        <div class="canvas-container">
+            <div id="particles-newton"></div>
+            <div id="newton-canvas"></div>
+        </div>
+        <div class="content">
+            <h1>Newton</h1>
+            <p>La gravedad, una manzana que cambió nuestra comprensión del mundo.</p>
+        </div>
+        <div class="narrative right">
+            <p>La manzana cae, revelando las leyes que gobiernan el cosmos.</p>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/FBXLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
