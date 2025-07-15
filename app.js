@@ -1,3 +1,78 @@
+// ---- PARTICLES MULTI-STYLE SEGÚN SECCIÓN ----
+const PARTICLE_STYLES = [
+    // Sección 0: Inicio (Big Bang)
+    {
+        particles: {
+            number: { value: 56 },
+            color: { value: "#fff" },
+            shape: { type: "circle" },
+            opacity: { value: 0.44 },
+            size: { value: 4 },
+            line_linked: { enable: true, opacity: 0.35, distance: 140, color: "#fff" },
+            move: { enable: true, speed: 0.6 }
+        }
+    },
+    // Sección 1: ADN (celeste y sin líneas)
+    {
+        particles: {
+            number: { value: 44 },
+            color: { value: "#40e0ff" },
+            shape: { type: "edge" },
+            opacity: { value: 0.39 },
+            size: { value: 5 },
+            line_linked: { enable: false },
+            move: { enable: true, speed: 2.0, direction: "bottom-right", random: true }
+        }
+    },
+    // Sección 2: Humanidad (círculos y triángulos)
+    {
+        particles: {
+            number: { value: 38 },
+            color: { value: "#fffaa8" },
+            shape: { type: ["circle", "triangle"] },
+            opacity: { value: 0.37 },
+            size: { value: 7 },
+            line_linked: { enable: false },
+            move: { enable: true, speed: 1.7 }
+        }
+    },
+    // Sección 3: Da Vinci (líneas doradas)
+    {
+        particles: {
+            number: { value: 55 },
+            color: { value: "#ffd700" },
+            shape: { type: "polygon", polygon: { nb_sides: 6 } },
+            opacity: { value: 0.27 },
+            size: { value: 5 },
+            line_linked: { enable: true, color: "#ffd700", opacity: 0.13 },
+            move: { enable: true, speed: 0.9 }
+        }
+    },
+    // Sección 4: Árbol/manzana (verde)
+    {
+        particles: {
+            number: { value: 45 },
+            color: { value: "#4ecb5f" },
+            shape: { type: "circle" },
+            opacity: { value: 0.41 },
+            size: { value: 6 },
+            line_linked: { enable: false },
+            move: { enable: true, speed: 1.5, direction: "bottom" }
+        }
+    }
+];
+
+let currentParticleIdx = -1;
+function setParticlesForSection(idx) {
+    if (currentParticleIdx === idx) return;
+    currentParticleIdx = idx;
+    if (window.pJSDom && window.pJSDom.length) {
+        window.pJSDom[0].pJS.fn.vendors.destroypJS();
+        window.pJSDom = [];
+    }
+    particlesJS("particles-bg", PARTICLE_STYLES[idx]);
+}
+
 // ---- CONFIGURACIÓN DE OBJETOS Y RANGOS DE SCROLL ---- //
 const SECTIONS = [
     { name: 'Brazos',   start: 0.00, end: 0.19 },
@@ -280,17 +355,53 @@ function updateObjects(p) {
     }
 }
 
+// ---- SINCRONIZAR TEXTOS EN EL SCROLL Y NAVBAR ---- //
 function syncText(p) {
+    // Calcula el índice de sección correcta
     let idx = 0;
     for (let i = 0; i < SECTIONS.length; i++) {
-        if (p >= SECTIONS[i].start && p < SECTIONS[i].end) idx = i;
+        if (
+            p >= SECTIONS[i].start &&
+            (i === SECTIONS.length - 1 || p < SECTIONS[i + 1].start)
+        ) {
+            idx = i;
+            break;
+        }
     }
+    setParticlesForSection(idx);
+
+    // Activa solo el texto de la sección correcta
     document.querySelectorAll('.story').forEach((el, i) => {
         el.classList.toggle('active', i === idx);
     });
+
+    // Navbar highlight
+    document.querySelectorAll('#main-navbar ul li a').forEach((a, i) => {
+        a.classList.toggle('active', i === idx);
+    });
 }
 
-window.addEventListener('DOMContentLoaded', () => {
+
+
+
+// Smooth scroll al hacer click en navbar (opcional)
+document.addEventListener('DOMContentLoaded', () => {
+    // Iniciar con partículas sección 0
+    setParticlesForSection(0);
+
+    document.querySelectorAll('#main-navbar a').forEach((a) => {
+        a.addEventListener('click', function (e) {
+            const targetId = this.getAttribute('href').replace('#', '');
+            const section = document.getElementById(targetId);
+            if (section) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: section.offsetTop - 35,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
     initThree();
     resize();
     animate();

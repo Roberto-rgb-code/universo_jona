@@ -6,6 +6,14 @@ body {
     background: #16005b;
     color: #fff;
     min-height: 6000px; /* Scroll largo */
+    padding-top: 62px; /* navbar fix */
+}
+
+#particles-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .fixed-bg {
@@ -16,33 +24,90 @@ body {
     pointer-events: none;
 }
 
+#main-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 62px;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    background: rgba(20, 0, 60, 0.84);
+    box-shadow: 0 4px 12px #0003;
+    color: #fff;
+}
+.navbar-logo {
+    font-weight: 900;
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    color: #fff;
+}
+#main-navbar ul {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    margin: 0; padding: 0;
+}
+#main-navbar ul li a {
+    color: #ffe372;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 7px;
+    padding: 5px 13px;
+    transition: background .2s, color .2s;
+}
+#main-navbar ul li a.active,
+#main-navbar ul li a:hover {
+    background: linear-gradient(90deg, #ffd700 30%, #4ecdc4 100%);
+    color: #14004a;
+}
+
+@media (max-width: 600px) {
+    #main-navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        height: auto;
+        padding: 12px 8px;
+    }
+    #main-navbar ul { flex-wrap: wrap; }
+    #main-navbar ul li { margin: 5px 9px 0 0; }
+}
+
 #main-canvas {
     position: fixed;
     top: 0; left: 0;
     width: 100vw; height: 100vh;
     display: block;
-    z-index: 1;
-    pointer-events: none;
-}
-
-#scroll-text {
-    position: absolute;
-    top: 0; left: 0; width: 100vw;
     z-index: 2;
     pointer-events: none;
 }
 
-.story {
-    position: absolute;
+#scroll-text {
+    position: relative;
+    top: 0;
+    left: 0;
     width: 100vw;
-    max-width: 800px;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.8s;
+    z-index: 3;
     pointer-events: none;
 }
 
+.story {
+    position: relative;
+    width: 100vw;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.7s;
+    pointer-events: none;
+}
 .story.active {
     opacity: 1;
     pointer-events: auto;
@@ -52,6 +117,7 @@ body {
 .story[data-step="1"] { top: 100vh; }
 .story[data-step="2"] { top: 190vh; }
 .story[data-step="3"] { top: 290vh; }
+.story[data-step="4"] { top: 380vh; }
 
 h1 {
     font-size: 2.5rem;
